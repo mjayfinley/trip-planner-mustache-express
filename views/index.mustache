@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="site.css"></link>
+    <title>Travel App</title>
+  </head>
+  <body>
+
+    <form action="/trips"  method="post">
+      <input type="text" name="destination"/>
+      <input type="date" name="departure"/>
+      <input type="date" name="comeBack"/>
+      <input type="submit" value="Submit"/>
+    </form>
+
+    <h3>Your Trips</h3>
+
+    <ul>
+      {{#trips}}
+      <li>
+        Destination: {{trip}}<br>
+
+        Departure Date: {{departureDate}}<br>
+
+        Return Date: {{returnDate}}<br>
+
+        {{tripId}}
+
+        <form action="/trips" method="delete">
+          <input type="submit" value="Delete"/>
+        </form>
+
+
+      </li>
+      {{/trips}}
+    </ul>
+
+  </body>
+
+</html>
