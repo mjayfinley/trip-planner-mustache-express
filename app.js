@@ -26,15 +26,22 @@ app.get('/',function(req,res){
   res.render('index')
 })
 
+app.get('/trips',function(req,res){
+  res.render('index',{trips: trips})
+})
+
 
 app.post('/trips',function(req,res){
 
+  let tripId = guid()
   let trip = req.body.destination
   let leave = req.body.departure
   let comeBack = req.body.comeBack
+  let image = req.body.image
 
-  trips.push({tripId : guid(),trip : trip,departureDate : leave,returnDate : comeBack})
+  trips.push({tripId : tripId,trip : trip,departureDate : leave,returnDate : comeBack,image : image})
 
+  //create new route/page to list trips?
   res.render('index',{trips: trips})
 
 })
@@ -48,6 +55,21 @@ function guid() {
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
+
+app.post('/deleteTrip',function(req,res){
+
+  let tripId = req.body.deletedTrip
+
+  trips = trips.filter(function(trip){
+    return trip.tripId != tripId
+
+  })
+
+  res.render('index',{trips: trips})
+})
+
+
+/*
 app.delete('/trips/:tripId',function(req,res){
   let tripRemove = req.params.tripId
 
@@ -56,7 +78,7 @@ app.delete('/trips/:tripId',function(req,res){
 
   res.render('index',{trips: trips})
 })
-
+*/
 
 
 

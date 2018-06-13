@@ -7,10 +7,13 @@
   </head>
   <body>
 
+    <h3>Enter your trip information:</h3>
+
     <form action="/trips"  method="post">
       <input type="text" name="destination"/>
       <input type="date" name="departure"/>
       <input type="date" name="comeBack"/>
+      <input type="text" name="image"/>
       <input type="submit" value="Submit"/>
     </form>
 
@@ -25,12 +28,12 @@
 
         Return Date: {{returnDate}}<br>
 
-        {{tripId}}
-
-        <form action="/trips" method="delete">
+        <img src="{{image}}">
+        
+        <form action="/deleteTrip" method='post'>
+          <input type="hidden" value="{{tripId}}" name="deletedTrip"/>
           <input type="submit" value="Delete"/>
         </form>
-
 
       </li>
       {{/trips}}
